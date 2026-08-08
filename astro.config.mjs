@@ -96,7 +96,7 @@ export default defineConfig({
 	],
 
 	site: siteConfig.siteURL,
-	base: "/",
+	base: "/LFS_Blog/",
 	trailingSlash: "always",
 	compressHTML: true,
 
