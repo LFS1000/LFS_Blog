@@ -8,8 +8,8 @@ import CodeGroupManager from "@/components/features/markdown/CodeGroupManager.as
 import DiagramManager from "@/components/features/markdown/DiagramManager.astro";
 import { pioConfig, profileConfig, siteConfig } from "@/config";
 
-const BANNER_HEIGHT = 35;
-const BANNER_HEIGHT_EXTEND = 30;
+const BANNER_HEIGHT = 50;
+const BANNER_HEIGHT_EXTEND = 0;
 const BANNER_HEIGHT_HOME = BANNER_HEIGHT + BANNER_HEIGHT_EXTEND;
 
 import { PAGE_WIDTH } from "../constants/constants";
@@ -259,6 +259,7 @@ const bannerOffset =
 		bannerOffset,
 		"banner-height-home": `${BANNER_HEIGHT_HOME}vh`,
 		"banner-height": `${BANNER_HEIGHT}vh`,
+		"banner-height-extend": "0px",
 	}}
 >
 	@reference "../styles/main.css";
@@ -267,6 +268,7 @@ const bannerOffset =
 		@media (width >= 1280px) {
 			.enable-banner #banner-wrapper {
 				height: var(--banner-height-home);
+				top: 0;
 				transform: translateY(var(--banner-height-extend));
 			}
 
@@ -276,10 +278,6 @@ const bannerOffset =
 			}
 			.enable-banner #main-grid {
 				transform: translateY(var(--banner-height-extend));
-			}
-			.enable-banner #top-row {
-				height: calc(var(--banner-height-home) - 4.5rem);
-				@apply transition-all duration-300;
 			}
 		}
 

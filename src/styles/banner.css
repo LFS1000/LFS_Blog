@@ -70,7 +70,7 @@ body.wallpaper-transparent #toc-inner-wrapper:has(table-of-contents[data-loaded=
 /* 桌面端 Banner 模式下的主内容区域位置 */
 @media (width >= 1280px) {
   body.enable-banner .absolute.w-full.z-30 {
-    top: 35vh !important;
+    top: max(50vh, 522px) !important;
   }
 }
 
@@ -309,7 +309,8 @@ body.wallpaper-transparent #toc-inner-wrapper:has(table-of-contents[data-loaded=
 .banner-image-slot-mobile img,
 .banner-image-slot-desktop img,
 #banner img {
-  object-position: center center !important;
+  object-fit: cover !important;
+  object-position: top center !important;
   pointer-events: none;
   -webkit-user-drag: none;
   user-drag: none;
@@ -323,6 +324,13 @@ body.wallpaper-transparent #toc-inner-wrapper:has(table-of-contents[data-loaded=
    桌面端样式 (1280px+)
    ========================================================================== */
 @media (width >= 1280px) {
+  /* Banner 从导航栏下方开始显示 */
+  body.enable-banner #banner-wrapper {
+    top: 4.5rem !important;
+    height: calc(var(--banner-height-home) - 4.5rem) !important;
+    min-height: 450px !important;
+  }
+
   .banner-text-overlay {
     align-items: center !important;
     justify-content: center !important;

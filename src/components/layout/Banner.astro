@@ -79,7 +79,6 @@ const bannerFormats = getImageFormats();
 <div
 	id="banner-wrapper"
 	class={`absolute z-10 w-full transition duration-700 overflow-hidden ${mobileNonHomeBannerClass}`}
-	style={`top: -${BANNER_HEIGHT_EXTEND}vh`}
 >
 	{isCarouselEnabled ? (
 		/* 轮播图模式：Ken Burns + Crossfade */
@@ -386,13 +385,16 @@ const bannerFormats = getImageFormats();
 					var baseClass = oldSlot.className.replace(/\bbanner-kb\b/g, '').trim();
 					newSlot.className = baseClass;
 					newSlot.style.opacity = '0';
+					newSlot.style.zIndex = '10';
 					newSlot.style.transition = 'opacity ' + FADE_MS + 'ms ease-in-out';
 					newSlot.innerHTML = frames[targetIndex];
 					oldSlot.parentNode.insertBefore(newSlot, oldSlot.nextSibling);
 
-					// 双 rAF：确保 opacity:0 已绘制，然后同时触发淡入 + Ken Burns
+					// 双 rAF：确保 opacity:0 已绘制，然后同时触发淡入 + 淡出 + Ken Burns
 					requestAnimationFrame(function() {
 						requestAnimationFrame(function() {
+							oldSlot.style.transition = 'opacity ' + FADE_MS + 'ms ease-in-out';
+							oldSlot.style.opacity = '0';
 							newSlot.style.opacity = '1';
 							newSlot.classList.add('banner-kb');
 						});
