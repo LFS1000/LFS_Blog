@@ -25,7 +25,7 @@ export const projectsData: Project[] = [
 		title: "Mizuki",
 		description:
 			"A next-gen Material Design 3 blog theme built with Astro, featuring i18n, dark mode, and responsive design.",
-		image: "/assets/projects/mizuki.webp",
+		image: "",
 		category: "web",
 		techStack: ["Astro", "TypeScript", "Tailwind CSS", "Svelte"],
 		status: "completed",
@@ -41,7 +41,7 @@ export const projectsData: Project[] = [
 		title: "FolkPatch",
 		description:
 			"A kernel-level ROOT solution based on KernelPatch, with polished UI, APM module system, and KPM kernel module support.",
-		image: "/assets/projects/folkpatch.webp",
+		image: "",
 		category: "mobile",
 		techStack: ["Kotlin", "Rust", "C++", "Java"],
 		status: "in-progress",

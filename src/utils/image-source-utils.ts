@@ -1,7 +1,16 @@
 import path from "node:path";
 
 const imageFiles = import.meta.glob<ImageMetadata>(
-	"../**/*.{avif,gif,jpeg,jpg,png,svg,webp}",
+	[
+		"../assets/images/**/*.{avif,gif,jpeg,jpg,png,svg,webp}",
+		"../assets/anime/**/*.{avif,gif,jpeg,jpg,png,svg,webp}",
+		"../assets/home/**/*.{avif,gif,jpeg,jpg,png,svg,webp}",
+		"../assets/music/cover/**/*.{avif,gif,jpeg,jpg,png,svg,webp}",
+		"../assets/desktop-banner/**/*.{avif,gif,jpeg,jpg,png,svg,webp}",
+		"../assets/mobile-banner/**/*.{avif,gif,jpeg,jpg,png,svg,webp}",
+		"../assets/avatar.*",
+		"../public/images/**/*.{avif,gif,jpeg,jpg,png,svg,webp}",
+	],
 	{ import: "default" },
 );
 
@@ -31,5 +40,13 @@ export async function resolveImageMetadata(
 		: `../${path.posix.join(basePath.replace(/^\/+/, ""), src)}`;
 	const loader = imageFiles[normalizeKey(path.posix.normalize(key))];
 
-	return loader ? await loader() : undefined;
+	if (!loader) return undefined;
+
+	try {
+		const meta = await loader();
+		return meta;
+	} catch (e) {
+		console.warn(`[WARN] Could not process image metadata for '${src}': ${e}`);
+		return undefined;
+	}
 }
