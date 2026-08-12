@@ -4,7 +4,7 @@ published: 2026-08-12
 description: 这是一篇测试文章，用于验证博客发布流程。
 tags: [测试]
 category: 测试
-draft: true
+draft: false
 ---
 
 # 测试文章
