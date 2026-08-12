@@ -1,11 +1,11 @@
 ---
-title: Markdown Extended Features
+title: Markdown 扩展功能
 published: 2024-05-01
 updated: 2026-07-30
-description: 'GitHub cards, callouts, code groups, Wiki Links, image grids, PlantUML, and other enhanced Markdown features in Mizuki.'
+description: 'Mizuki 中的 GitHub 卡片、提示框、代码组、Wiki 链接、图片网格、PlantUML 等增强 Markdown 功能。'
 image: ''
-tags: [Demo, Example, Markdown, Mizuki]
-category: 'Examples'
+tags: [演示, 示例, Markdown, Mizuki]
+category: '示例'
 draft: false 
 ---
 

@@ -1,15 +1,15 @@
 ---
-title: Encrypted Post
+title: 加密文章
 published: 2024-01-15
-description: This is an article for testing the page encryption feature
+description: 这是一篇用于测试页面加密功能的文章
 encrypted: true
 pinned: true
 password: "123456"
 passwordHint: "123456"
 hideHomeContent: true
 alias: "encrypted-example"
-tags: ["Test", "Encryption"]
-category: "Technology"
+tags: ["测试", "加密"]
+category: "技术"
 ---
 
 This blog template is built with [Astro](https://astro.build/). For the things that are not mentioned in this guide, you may find the answers in the [Astro Docs](https://docs.astro.build/).
@@ -75,7 +75,7 @@ title: My Special Article
 published: 2024-01-15
 alias: "my-special-article"
 tags: ["Example"]
-category: "Technology"
+category: "技术"
 ---
 ```
 

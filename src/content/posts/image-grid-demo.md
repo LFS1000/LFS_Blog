@@ -1,9 +1,9 @@
 ---
-title: "Image Gallery Grid: Syntax and Complete Examples"
+title: "图片画廊网格：语法与完整示例"
 published: 2026-07-13
-description: "A complete guide to image gallery grid syntax, parameters, cropping, responsive behavior, captions, and lightbox navigation."
-tags: [Markdown, Gallery, Image Grid, Demo]
-category: "Examples"
+description: "图片画廊网格语法、参数、裁剪、响应式行为、标题和灯箱导航的完整指南。"
+tags: [Markdown, 画廊, 图片网格, 演示]
+category: "示例"
 draft: false
 ---
 
