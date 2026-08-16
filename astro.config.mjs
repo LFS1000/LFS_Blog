@@ -96,7 +96,7 @@ export default defineConfig({
 	],
 
 	site: siteConfig.siteURL,
-	base: "/LFS_Blog/",
+	base: process.env.VERCEL ? "/" : "/LFS_Blog/",
 	trailingSlash: "always",
 	compressHTML: true,
 
