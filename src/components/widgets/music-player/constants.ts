@@ -27,14 +27,7 @@ export const LOCAL_PLAYLIST: Song[] = [
 		url: "assets/music/url/hitori.mp3",
 		duration: 253,
 	},
-	{
-		id: 3,
-		title: "眩耀夜行",
-		artist: "ス리즈ブーケ",
-		cover: xryxCover,
-		url: "assets/music/url/xryx.mp3",
-		duration: 245,
-	},
+	// Removed: 眩耀夜行 (xryx.mp3 was corrupted - only 52 bytes)
 	{
 		id: 4,
 		title: "春雷の頃",

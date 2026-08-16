@@ -9,8 +9,12 @@ export function isRemoteAssetUrl(value: string): boolean {
 }
 
 export function resolveAssetUrl(value: string): string {
-	if (!value || isRemoteAssetUrl(value) || value.startsWith("/")) {
+	if (!value || isRemoteAssetUrl(value)) {
 		return value;
 	}
-	return `/${value}`;
+	const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+	if (value.startsWith("/")) {
+		return `${base}${value}`;
+	}
+	return `${base}/${value}`;
 }
