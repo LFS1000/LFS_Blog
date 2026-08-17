@@ -108,15 +108,27 @@ export const siteConfig: SiteConfig = {
 	banner: {
 		// 支持单张图片或图片数组，当数组长度 > 1 时自动启用轮播
 		src: {
-			desktop: "/assets/desktop-banner/single.png", // 桌面横幅图片
-			mobile: "/assets/mobile-banner/single.png", // 移动横幅图片
-		}, // 使用本地横幅图片
+			desktop: [
+				"/assets/desktop-banner/banner-1.png",
+				"/assets/desktop-banner/banner-2.png",
+				"/assets/desktop-banner/banner-3.png",
+				"/assets/desktop-banner/banner-4.png",
+				"/assets/desktop-banner/banner-5.png",
+			],
+			mobile: [
+				"/assets/mobile-banner/banner-1.png",
+				"/assets/mobile-banner/banner-2.png",
+				"/assets/mobile-banner/banner-3.png",
+				"/assets/mobile-banner/banner-4.png",
+				"/assets/mobile-banner/banner-5.png",
+			],
+		},
 
-		position: "bottom", // 等同于 object-position，仅支持 'top', 'center', 'bottom'。默认为 'center'
+		position: "bottom",
 
 		carousel: {
-			enable: false,
-			interval: 3,
+			enable: true,
+			interval: 5,
 			switchable: true,
 		},
 
