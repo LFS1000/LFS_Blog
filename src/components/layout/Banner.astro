@@ -73,6 +73,15 @@ const kbDurationMs = carouselIntervalMs + fadeMs;
 
 const hasBannerCredit = siteConfig.banner.credit.enable;
 const hasBannerLink = !!siteConfig.banner.credit.url;
+// 获取单张图片的 position：优先使用 positionOverrides 中的配置，否则用全局 position
+const getPosition = (index: number, isDesktop: boolean): string => {
+	const overrides = (siteConfig.banner as any).positionOverrides;
+	if (overrides) {
+		const map = isDesktop ? overrides.desktop : overrides.mobile;
+		if (map && map[index] != null) return map[index];
+	}
+	return siteConfig.banner.position;
+};
 
 const bannerQuality = getImageQuality();
 const bannerMobileQuality = Math.round(bannerQuality * 0.9);
@@ -101,7 +110,7 @@ const bannerFormats = getImageFormats();
 						class="object-cover h-full w-full"
 						src={mobileImages[0]}
 						media="(max-width: 767px)"
-						position={siteConfig.banner.position}
+						position={getPosition(0, false)}
 						widths={[640, 1024, 1536]}
 						sizes="100vw"
 						loading="eager"
@@ -118,7 +127,7 @@ const bannerFormats = getImageFormats();
 						class="object-cover h-full w-full"
 						src={src}
 						media="(max-width: 767px)"
-						position={siteConfig.banner.position}
+						position={getPosition(i + 1, false)}
 						widths={[640, 1024, 1536]}
 						sizes="100vw"
 						loading="lazy"
@@ -138,7 +147,7 @@ const bannerFormats = getImageFormats();
 						class="object-cover h-full w-full"
 						src={desktopImages[0]}
 						media="(min-width: 768px)"
-						position={siteConfig.banner.position}
+						position={getPosition(0, true)}
 						widths={[1024, 1536, 2048, 2560]}
 						sizes="100vw"
 						loading="eager"
@@ -155,7 +164,7 @@ const bannerFormats = getImageFormats();
 						class="object-cover h-full w-full"
 						src={src}
 						media="(min-width: 768px)"
-						position={siteConfig.banner.position}
+						position={getPosition(i + 1, true)}
 						widths={[1024, 1536, 2048, 2560]}
 						sizes="100vw"
 						loading="lazy"

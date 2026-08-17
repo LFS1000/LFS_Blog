@@ -125,6 +125,12 @@ export const siteConfig: SiteConfig = {
 		},
 
 		position: "center 80%",
+		positionOverrides: {
+			// 为特定图片单独设置位置，索引从0开始
+			// 值同 CSS object-position，超过100%可显示更靠下的内容
+			desktop: { 0: "center 110%" },
+			mobile: { 0: "center 110%" },
+		},
 
 		carousel: {
 			enable: true,
