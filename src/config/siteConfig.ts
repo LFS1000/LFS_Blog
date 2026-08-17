@@ -124,7 +124,7 @@ export const siteConfig: SiteConfig = {
 			],
 		},
 
-		position: "bottom",
+		position: "center 80%",
 
 		carousel: {
 			enable: true,

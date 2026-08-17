@@ -111,7 +111,7 @@ export interface SiteConfig {
 					desktop?: string | string[];
 					mobile?: string | string[];
 			  };
-		position?: "top" | "center" | "bottom";
+		position?: "top" | "center" | "bottom" | string;
 		carousel?: {
 			enable: boolean;
 			interval: number;
@@ -459,7 +459,7 @@ export interface FullscreenWallpaperConfig {
 				desktop?: string | string[];
 				mobile?: string | string[];
 		  };
-	position?: "top" | "center" | "bottom";
+	position?: "top" | "center" | "bottom" | string;
 	carousel?: {
 		enable: boolean;
 		interval: number;
