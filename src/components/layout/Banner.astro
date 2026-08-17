@@ -11,7 +11,6 @@ import { Icon } from "astro-icon/components";
 import { siteConfig } from "../../config";
 import { BANNER_HEIGHT_EXTEND } from "../../constants/constants";
 import { getImageFormats, getImageQuality } from "../../utils/image-utils";
-import { publicImageUrl } from "../../utils/image-source-utils";
 
 interface Props {
 	// Banner 配置
@@ -50,9 +49,9 @@ const normalizeToArray = (images: string | string[]): string[] =>
 const desktopImages = normalizeToArray(bannerImages.desktop).filter(Boolean);
 const mobileImages = normalizeToArray(bannerImages.mobile).filter(Boolean);
 
-// Apply BASE_URL for single-image mode (carousel mode uses ViewportImage which handles this internally)
-const singleDesktopImages = desktopImages.map(src => publicImageUrl(src));
-const singleMobileImages = mobileImages.map(src => publicImageUrl(src));
+// For single-image mode: strip leading "/" so ViewportImage can resolve metadata from src/assets/
+const singleDesktopSrc = desktopImages[0]?.replace(/^\//, "") || "";
+const singleMobileSrc = mobileImages[0]?.replace(/^\//, "") || "";
 const isCarouselEnabled =
 	siteConfig.banner.carousel?.enable &&
 	(desktopImages.length > 1 || mobileImages.length > 1);
@@ -168,69 +167,40 @@ const bannerFormats = getImageFormats();
 			))}
 		</div>
 	) : (
-		/* 单图模式 */
+		/* 单图模式 - 使用 ViewportImage 走 Astro 图片优化 */
 		<div id="banner-single-container" class="relative h-full w-full">
-			<script
-				is:inline
-				define:vars={{
-					desktopImages: singleDesktopImages,
-					mobileImages: singleMobileImages,
-					position: siteConfig.banner.position,
-				}}
-			>
-				(function () {
-					const getRandomImage = (images, storageKey) => {
-						if (Array.isArray(images)) {
-							if (images.length === 0) {return null;}
-							if (images.length === 1) {return images[0];}
-
-							const lastIndex = sessionStorage.getItem(storageKey);
-							let newIndex;
-
-							do {
-								newIndex = Math.floor(Math.random() * images.length);
-							} while (newIndex === parseInt(lastIndex || "-1"));
-
-							sessionStorage.setItem(storageKey, newIndex.toString());
-							return images[newIndex];
-						}
-						return images || null;
-					};
-
-					const container = document.getElementById("banner-single-container");
-
-					// 检查容器是否已有图片，避免在页面切换或缩放时重复创建
-					if (container.querySelector("img")) {
-						return;
-					}
-
-					const desktopSrc = getRandomImage(desktopImages, "banner_desktop_index");
-					const mobileSrc = getRandomImage(mobileImages, "banner_mobile_index");
-
-					if (!desktopSrc && !mobileSrc) return;
-
-					const picture = document.createElement("picture");
-					picture.className = "block h-full w-full";
-					if (mobileSrc) {
-						const mobileSource = document.createElement("source");
-						mobileSource.media = "(max-width: 767px)";
-						mobileSource.srcset = mobileSrc;
-						picture.appendChild(mobileSource);
-					}
-
-					const image = document.createElement("img");
-					image.id = "banner";
-					image.alt = "Banner image of the blog";
-					image.className =
-						"object-cover h-full w-full transition duration-700 opacity-100";
-					image.src = desktopSrc || mobileSrc;
-					image.loading = "eager";
-					image.fetchPriority = "high";
-					image.style.objectPosition = position;
-					picture.appendChild(image);
-					container.appendChild(picture);
-				})();
-			</script>
+			{singleMobileSrc && (
+				<div class="absolute inset-0 block md:hidden">
+					<ViewportImage
+						alt="Banner image"
+						class="object-cover h-full w-full"
+						src={singleMobileSrc}
+						media="(max-width: 767px)"
+						position={siteConfig.banner.position}
+						loading="eager"
+						fetchpriority="high"
+						quality={bannerQuality}
+						formats={bannerFormats}
+						sizes="100vw"
+					/>
+				</div>
+			)}
+			{singleDesktopSrc && (
+				<div class="absolute inset-0 hidden md:block">
+					<ViewportImage
+						alt="Banner image"
+						class="object-cover h-full w-full"
+						src={singleDesktopSrc}
+						media="(min-width: 768px)"
+						position={siteConfig.banner.position}
+						loading="eager"
+						fetchpriority="high"
+						quality={bannerQuality}
+						formats={bannerFormats}
+						sizes="100vw"
+					/>
+				</div>
+			)}
 		</div>
 	)}
 
