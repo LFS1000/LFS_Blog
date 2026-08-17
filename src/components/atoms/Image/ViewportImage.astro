@@ -24,6 +24,7 @@ interface Props {
 	widths?: number[];
 	sizes?: string;
 	quality?: number;
+	objectFit?: string;
 }
 
 const {
@@ -38,6 +39,7 @@ const {
 	widths,
 	sizes,
 	quality = getImageQuality(),
+	objectFit,
 } = Astro.props;
 const className = Astro.props.class;
 const metadata = await resolveImageMetadata(src);
@@ -83,7 +85,7 @@ function getImageMimeType(format: ImageFormat | undefined): string | undefined {
 		src={transparentFallback}
 		alt={alt}
 		class={className}
-		style={`object-position: ${position}`}
+		style={`object-position: ${position}${objectFit ? `; object-fit: ${objectFit}` : ""}`}
 		width={metadata?.width ?? 1}
 		height={metadata?.height ?? 1}
 		loading={loading}

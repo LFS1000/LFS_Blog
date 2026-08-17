@@ -128,8 +128,15 @@ export const siteConfig: SiteConfig = {
 		positionOverrides: {
 			// 为特定图片单独设置位置，索引从0开始
 			// 值同 CSS object-position，超过100%可显示更靠下的内容
-			desktop: { 0: "center 110%" },
-			mobile: { 0: "center 110%" },
+			desktop: { 0: "center" },
+			mobile: { 0: "center" },
+		},
+		objectFitOverrides: {
+			// 为特定图片单独设置 object-fit，索引从0开始
+			// "contain" = 完整显示（留空），"cover" = 填满裁剪（默认）
+			// 竖图建议用 contain 才能显示全身
+			desktop: { 0: "contain" },
+			mobile: { 0: "contain" },
 		},
 
 		carousel: {

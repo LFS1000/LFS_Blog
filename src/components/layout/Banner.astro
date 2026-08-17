@@ -82,6 +82,15 @@ const getPosition = (index: number, isDesktop: boolean): string => {
 	}
 	return siteConfig.banner.position;
 };
+// 获取单张图片的 object-fit：优先使用 objectFitOverrides，否则默认 cover
+const getObjectFit = (index: number, isDesktop: boolean): string | undefined => {
+	const overrides = (siteConfig.banner as any).objectFitOverrides;
+	if (overrides) {
+		const map = isDesktop ? overrides.desktop : overrides.mobile;
+		if (map && map[index] != null) return map[index];
+	}
+	return undefined;
+};
 
 const bannerQuality = getImageQuality();
 const bannerMobileQuality = Math.round(bannerQuality * 0.9);
@@ -111,6 +120,7 @@ const bannerFormats = getImageFormats();
 						src={mobileImages[0]}
 						media="(max-width: 767px)"
 						position={getPosition(0, false)}
+					objectFit={getObjectFit(0, false)}
 						widths={[640, 1024, 1536]}
 						sizes="100vw"
 						loading="eager"
@@ -128,6 +138,7 @@ const bannerFormats = getImageFormats();
 						src={src}
 						media="(max-width: 767px)"
 						position={getPosition(i + 1, false)}
+					objectFit={getObjectFit(i + 1, false)}
 						widths={[640, 1024, 1536]}
 						sizes="100vw"
 						loading="lazy"
@@ -148,6 +159,7 @@ const bannerFormats = getImageFormats();
 						src={desktopImages[0]}
 						media="(min-width: 768px)"
 						position={getPosition(0, true)}
+					objectFit={getObjectFit(0, true)}
 						widths={[1024, 1536, 2048, 2560]}
 						sizes="100vw"
 						loading="eager"
@@ -165,6 +177,7 @@ const bannerFormats = getImageFormats();
 						src={src}
 						media="(min-width: 768px)"
 						position={getPosition(i + 1, true)}
+					objectFit={getObjectFit(i + 1, true)}
 						widths={[1024, 1536, 2048, 2560]}
 						sizes="100vw"
 						loading="lazy"
